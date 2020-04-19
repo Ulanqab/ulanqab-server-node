@@ -4,6 +4,7 @@
   "description": "ulanqab server",
   "type": "module",
   "main": "index.js",
+  "exports": "./index.js",
   "scripts": {
     "serve": "nodemon ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +20,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql2": "^2.1.0",
-    "sequelize": "^5.21.6"
+    "sequelize": "^6.0.0-beta.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
