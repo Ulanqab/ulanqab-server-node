@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
 const initPosts = (database) => {
-    return database.define("restTutorial", {
+    return database.define("post", {
       title: {
         type: Sequelize.STRING
       },
