@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import dbConfig from '../config/db.config.js';
-import model from './Post.js';
+import modelPosts from './Post.js';
+import modelUsers from './User.js';
 
 const database = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
@@ -23,6 +24,7 @@ db.dropRestApiTable = () => {
     });
   };
 
-db.posts = model.initPosts(database, Sequelize)
+db.users = modelUsers.initUsers(database, Sequelize)
+db.posts = modelPosts.initPosts(database, Sequelize)
 
 export default db

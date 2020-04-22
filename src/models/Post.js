@@ -1,6 +1,10 @@
-import Sequelize from 'sequelize';
 
-const initPosts = (database) => {
+/**
+ * 
+ * @param {*} database 
+ * @param {*} Sequelize 
+ */
+const initPosts = (database, Sequelize) => {
     return database.define("post", {
       title: {
         type: Sequelize.STRING
