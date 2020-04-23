@@ -12,6 +12,13 @@ const initUsers = (database, Sequelize) => {
         },
         nickname: {
             type: Sequelize.STRING,
+        },
+        email: {
+            type: Sequelize.STRING,
+            unique: 'compositeIndex',
+        },
+        mobile: {
+            type: Sequelize.STRING,
             unique: 'compositeIndex',
         },
         password: {
@@ -21,13 +28,52 @@ const initUsers = (database, Sequelize) => {
             type: Sequelize.INTEGER,
             defaultValue: 0, // 0：普通用户， 1：管理员
         },
-        createAt: {
-            type: Sequelize.DATE,
-            defaultValue: Sequelize.NOW,
-        }
+    })
+}
+
+const initUserDetail = (database, Sequelize) => {
+    return database.define('userDetail', {
+        id: {
+            type: Sequelize.INTEGER,
+            unique: 'compositeIndex',
+        },
+        uid: {
+            type: Sequelize.UUID,
+            primaryKey: true,
+            unique: 'compositeIndex',
+        },
+        nickname: {
+            type: Sequelize.STRING,
+        },
+        email: {
+            type: Sequelize.STRING,
+            unique: 'compositeIndex',
+        },
+        mobile: {
+            type: Sequelize.STRING,
+            unique: 'compositeIndex',
+        },
+        password: {
+            type: Sequelize.STRING,
+        },
+        role: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0, // 0：普通用户， 1：管理员
+        },
+        age: {
+            type: Sequelize.INTEGER,
+        },
+        sex: {
+            type: Sequelize.INTEGER,
+        },
+        des: {
+            type: Sequelize.STRING
+        },
+        
     })
 }
 
 export default {
-    initUsers
+    initUsers,
+    initUserDetail,
 }

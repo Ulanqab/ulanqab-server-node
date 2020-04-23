@@ -6,6 +6,12 @@
  */
 const initPosts = (database, Sequelize) => {
     return database.define("post", {
+      userId: {
+        type: Sequelize.INTEGER
+      },
+      userName: {
+        type: Sequelize.STRING
+      },
       title: {
         type: Sequelize.STRING
       },

@@ -1,6 +1,7 @@
 import db from '../models/index.js';
 
 const userObj = db.users;
+const userDetailObj = db.userDetail;
 const op = db.Sequelize.Op
 
 function register(request, result) {
@@ -24,6 +25,11 @@ function register(request, result) {
 
     userObj.create(user).then(data => {
         result.send(data)
+        userDetailObj.create(user).then(data => {
+            console.log('create detail success :::', data)
+        }).catch(error => {
+            console.log('create user detail error:::', error.message)
+        })
     }).catch(error => {
         result.status(500).send({
             message: error.message || 'Some error occured while register user.'

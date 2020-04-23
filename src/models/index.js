@@ -24,7 +24,10 @@ db.dropRestApiTable = () => {
     });
   };
 
-db.users = modelUsers.initUsers(database, Sequelize)
-db.posts = modelPosts.initPosts(database, Sequelize)
+db.users = modelUsers.initUsers(database, Sequelize);
+db.userDetail = modelUsers.initUserDetail(database, Sequelize);
+db.posts = modelPosts.initPosts(database, Sequelize);
+db.userDetail.belongsTo(db.users);
+db.posts.belongsTo(db.users);
 
 export default db
