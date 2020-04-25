@@ -4,19 +4,25 @@ const userObj = db.users;
 const userDetailObj = db.userDetail;
 const op = db.Sequelize.Op
 
-function register(request, result) {
+function valide(request, result) {
     if (!request.body.nickname) {
         result.status(400).send({
             message: 'Please input nickname.'
         })
-        return
+        return false
     }
     if (!request.body.password) {
         result.status(400).send({
             message: 'Please input password.'
         })
-        return
+        return false
     }
+    return true
+}
+
+function register(request, result) {
+    
+    if (!valide(request, result)) return
 
     const user = {
         mobile: request.body.mobile,
@@ -41,18 +47,9 @@ function register(request, result) {
 }
 
 function login(request, result) {
-    if (!request.body.nickname) {
-        result.status(400).send({
-            message: 'Please input nickname.'
-        })
-        result
-    }
-    if (!request.body.password) {
-        result.status(400).send({
-            message: 'Please input password.'
-        })
-        return
-    }
+
+    if (!valide(request, result)) return
+
     userObj.findAll({
         where: { nickname: request.body.nickname}
     }).then(data => {
@@ -68,8 +65,51 @@ function logout(request, result) {
 
 }
 
+function update(request, result) {
+    
+    if (!valide(request, result)) return
+
+    const ID = request.body.id;
+    userObj.update(request.body, {
+        where: {id: ID}
+    }).then(num => {
+        if (num[0] === 1) {
+            result.send({
+                message: 'Update User Detail success.'
+            })
+        } else {
+            result.send({
+                message: `Cannot update User ${request.body.id}.`
+            })
+        }
+    }).catch(error => {
+        result.status(500).send({
+            message: error.message || `Some error occurred while update User ${request.body.id}.`
+        })
+    })
+    userDetailObj.update(request.body, {
+        where: {id: ID}
+    }).then(num => {
+        if (num[0] === 1) {
+            result.send({
+                message: 'Update User Detail success.'
+            })
+        } else {
+            result.send({
+                message: `Cannot update User ${request.body.id}.`
+            })
+        }
+    }).catch(error => {
+        result.status(500).send({
+            message: error.message || `Some error occurred while update User ${request.body.id}.`
+        })
+    })
+}
+
+
 export default {
     register,
     login,
     logout,
+    update,
 }

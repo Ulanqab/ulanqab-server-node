@@ -22,6 +22,8 @@ router.post('/api/users/login', User.login)
 
 router.post('/api/users/logout', User.logout)
 
+router.post('/api/users/update', User.update)
+
 
 // RouterPosts(router)
 
