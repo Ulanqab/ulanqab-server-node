@@ -28,6 +28,14 @@ const initUsers = (database, Sequelize) => {
             type: Sequelize.INTEGER,
             defaultValue: 0, // 0：普通用户， 1：管理员
         },
+        isLock: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
+        isDelete: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
     })
 }
 
@@ -68,7 +76,15 @@ const initUserDetail = (database, Sequelize) => {
         },
         des: {
             type: Sequelize.STRING,
-        }
+        },
+        isLock: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
+        isDelete: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
+        },
     })
 }
 

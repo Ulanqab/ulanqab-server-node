@@ -66,7 +66,7 @@ function logout(request, result) {
 }
 
 function update(request, result) {
-    
+
     if (!valide(request, result)) return
 
     const ID = request.body.id;
@@ -106,10 +106,71 @@ function update(request, result) {
     })
 }
 
+function deleteUser(request, result) {
+    
+    // if (!valide(request, result)) return
+
+    const paramID = request.params.id
+    if (!paramID) {
+        result.status(400).send({
+            message: 'Delete user need user id'
+        })
+        return
+    }
+
+    userObj.findAll({
+        where: {id: paramID}
+    }).then(data => {
+        data.isDelete = true
+        userObj.update(data, {
+            where: {id: paramID}
+        }).then(num => {
+            if (num[0] === 1) {
+                result.send({
+                    message: `Delete user ${paramID} success.`
+                })
+            } else {
+                result.status(400).send({
+                    message: `Some error occurred while delete user ${paramID}.`
+                })
+            }
+        })
+    }).catch(error => {
+        result.status(500).send({
+            message: error.message || `Some error occurred while delete User ${request.body.id}.`
+        })
+    })
+
+    userDetailObj.findAll({
+        where: {id: paramID}
+    }).then(data => {
+        data.isDelete = true
+        userDetailObj.update(data, {
+            where: {id: paramID}
+        }).then(num => {
+            if (num[0] === 1) {
+                result.send({
+                    message: `Delete user ${paramID} success.`
+                })
+            } else {
+                result.status(400).send({
+                    message: `Some error occurred while delete user ${paramID}.`
+                })
+            }
+        })
+    }).catch(error => {
+        result.status(500).send({
+            message: error.message || `Some error occurred while delete User ${request.body.id}.`
+        })
+    })
+
+}
+
 
 export default {
     register,
     login,
     logout,
     update,
+    deleteUser,
 }

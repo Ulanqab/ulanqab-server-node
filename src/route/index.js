@@ -24,6 +24,8 @@ router.post('/api/users/logout', User.logout)
 
 router.post('/api/users/update', User.update)
 
+router.post('/api/users/delete/:id', User.deleteUser)
+
 
 // RouterPosts(router)
 
