@@ -67,9 +67,8 @@ const initUserDetail = (database, Sequelize) => {
             type: Sequelize.INTEGER,
         },
         des: {
-            type: Sequelize.STRING
-        },
-        
+            type: Sequelize.STRING,
+        }
     })
 }
 

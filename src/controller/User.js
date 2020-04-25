@@ -19,16 +19,19 @@ function register(request, result) {
     }
 
     const user = {
+        mobile: request.body.mobile,
         nickname: request.body.nickname,
         password: request.body.password,
     }
 
     userObj.create(user).then(data => {
-        result.send(data)
-        userDetailObj.create(user).then(data => {
-            console.log('create detail success :::', data)
+        userDetailObj.create(data.dataValues).then(detail => {
+            result.send(data)
         }).catch(error => {
             console.log('create user detail error:::', error.message)
+            result.status(500).send({
+                message: error.message || 'Some error occured while register user.'
+            })
         })
     }).catch(error => {
         result.status(500).send({
