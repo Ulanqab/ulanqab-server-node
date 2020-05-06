@@ -1,6 +1,7 @@
 import express from 'express';
 import Post from '../controller/Post.js';
 import User from '../controller/User.js';
+import Category from '../controller/Category.js';
 
 const router = express.Router();
 
@@ -25,6 +26,15 @@ router.post('/api/users/logout', User.logout)
 router.post('/api/users/update', User.update)
 
 router.post('/api/users/delete/:id', User.deleteUser)
+
+// category
+router.post('/api/category/create', Category.create)
+
+router.post('/api/category/update/:id', Category.updateById)
+
+router.post('/api/category/delete/:id', Category.deleteById)
+
+router.post('/api/category/list', Category.getList)
 
 
 // RouterPosts(router)

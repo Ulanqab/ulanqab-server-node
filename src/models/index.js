@@ -2,6 +2,7 @@ import Sequelize from 'sequelize';
 import dbConfig from '../config/db.config.js';
 import modelPosts from './Post.js';
 import modelUsers from './User.js';
+import modelCategory from './Ccategory.js';
 
 const database = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
@@ -24,9 +25,11 @@ db.dropRestApiTable = () => {
     });
   };
 
+  console.log('modelCategory', modelCategory)
 db.users = modelUsers.initUsers(database, Sequelize);
 db.userDetail = modelUsers.initUserDetail(database, Sequelize);
 db.posts = modelPosts.initPosts(database, Sequelize);
+db.category = modelCategory.init(database, Sequelize);
 db.userDetail.belongsTo(db.users);
 db.posts.belongsTo(db.users);
 
