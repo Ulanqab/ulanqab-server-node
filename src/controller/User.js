@@ -32,7 +32,10 @@ function register(request, result) {
 
     userObj.create(user).then(data => {
         userDetailObj.create(data.dataValues).then(detail => {
-            result.send(data)
+            result.send({
+                code: 200,
+                data
+            })
         }).catch(error => {
             console.log('create user detail error:::', error.message)
             result.status(500).send({
@@ -53,7 +56,10 @@ function login(request, result) {
     userObj.findAll({
         where: { nickname: request.body.nickname}
     }).then(data => {
-        result.send(data)
+        result.send({
+            code: 200,
+            data: data[0]
+        })
     }).catch(error => {
         result.status(500).send({
             message: error.message || 'Some error occured while login.'

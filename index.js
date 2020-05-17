@@ -13,7 +13,7 @@ import db from './src/models/index.js';
 import api from './src/route/index.js';
 
 const corsettings = {
-    originUrl: 'http://localhost:8081'
+    originUrl: 'http://localhost:8080'
 }
 const server = express();
 server.use(cors(corsettings));
@@ -26,7 +26,7 @@ server.use(bodyparser.urlencoded({ extended: true}));
 server.use('/', api);
 
 // set listening ports for request
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 server.listen(port, () => {
     console.log('ulanqab start::: ', port);
